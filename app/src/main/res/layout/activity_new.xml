@@ -8,11 +8,40 @@
     tools:context="org.androidtown.lab.NewActivity"
     >
 
-    <Button
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TableRow>
+        <TextView android:text="성명"
+            android:id="@+id/name"
+            />
+        <TextView android:id="@+id/nameline"/>
+    </TableRow>
+
+
+    <TableRow>
+        <TextView android:text="성별"
+            android:id="@+id/mw"
+            />
+        <TextView android:id="@+id/mwline"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView android:text="수신여부"
+            android:id="@+id/send"
+            />
+        <TextView android:id="@+id/sendline"/>
+    </TableRow>
+
+    </TableLayout>
+
+    <Button android:text="이전"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:text="닫기"
-        android:layout_gravity="center"/>
+        android:layout_gravity="right"/>
+
 
 </LinearLayout>

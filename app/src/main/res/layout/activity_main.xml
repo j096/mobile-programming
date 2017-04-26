@@ -7,29 +7,96 @@
     android:orientation="vertical"
     >
 
-    <EditText
+
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="이름"
-        android:id="@+id/editText1"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="6dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
+        android:stretchColumns="2,3"
+        >
+    <TableRow android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="나이"
-        android:id="@+id/editText2"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="6dp"/>
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="성명"
+            android:id="@+id/name"
+            />
+
+        <EditText android:id="@+id/nameline"
+            android:layout_span="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </TableRow>
 
 
-    <Button
-        android:text="추가"
+    <TableRow
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView android:text="성별"
+            android:id="@+id/mw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <RadioGroup
+            android:id="@+id/radGroupMW"
+            android:orientation="horizontal"
+
+            android:weightSum="1">
+        <RadioButton
+            android:text="남"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/M"
+            android:layout_weight="0.66" />
+
+            <RadioButton
+                android:text="여"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/W"
+                />
+
+        </RadioGroup>
+
+
+
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView android:text="수신여부"
+            android:id="@+id/send"
+            />
+
+        <CheckBox
+            android:text="SMS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sms"
+
+
+            />
+
+        <CheckBox
+            android:text="e-mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"            />
+
+    </TableRow>
+
+
+    </TableLayout>
+
+    <Button android:text="등록"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button1" />
+        android:layout_gravity="right"
+        android:id="@+id/button1"
+        />
+
 </LinearLayout>
 
