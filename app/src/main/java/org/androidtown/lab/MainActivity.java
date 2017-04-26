@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     i.putExtra("MW","여");
 
                 if(cb1.isChecked()) {
-                    check += "SMS";
+                    check += "SMS ";
                     i.putExtra("check", check);
                 }
                 if(cb2.isChecked()) {

@@ -45,21 +45,19 @@
             android:weightSum="1">
         <RadioButton
             android:text="남"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/M"
-            android:layout_weight="0.66" />
-
-            <RadioButton
-                android:text="여"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/W"
-                />
+            />
 
         </RadioGroup>
 
-
+        <RadioButton
+            android:text="여"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/W"
+            />
 
 
     </TableRow>
