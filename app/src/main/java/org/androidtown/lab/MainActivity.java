@@ -1,129 +1,97 @@
 package org.androidtown.lab;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-    Button b1;
-    Button b2;
-    Button b3;
-    Button b4;
-    EditText et;
-    String text;
-    String note="text.txt";
-
+    private MediaPlayer mediaPlayer;
+    RelativeLayout layout1;
+    RelativeLayout layout2;
+    int c1=0,c2=0;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        et=(EditText)findViewById(R.id.editText);
-        b1=(Button)findViewById(R.id.button);
-        b2=(Button)findViewById(R.id.button2);
-        b3=(Button)findViewById(R.id.button3);
-        b4=(Button)findViewById(R.id.button4);
+        layout1=(RelativeLayout)findViewById(R.id.m1);
+        layout2=(RelativeLayout)findViewById(R.id.m2);
 
 
 
-        b1.setOnClickListener(new View.OnClickListener(){
+        layout1.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
-
-
-                text=et.getText().toString();
-                File sd= Environment.getExternalStorageDirectory();
-                File directory=new File(sd.getAbsolutePath()+"/MyFiles");
-
-                directory.mkdirs();
-                File file=new File(directory+"/"+note);
-                try {
-                    FileOutputStream fOut=new FileOutputStream(file);
-                    OutputStreamWriter osw=new OutputStreamWriter(fOut);
-                    osw.write(text);
-                    osw.close();
-                    fOut.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            public void onClick(View v) {
+                c1++;
+                if (c1 % 2 == 0) {
+                    killMediaPlayer();
+                    Toast.makeText(getApplicationContext(), "음악 파일 멈춤1", Toast.LENGTH_LONG).show();
                 }
 
-
-            }
-        });
-
-        b2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                et.setText("");
-            }
-        });
-
-        b3.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                File sd=Environment.getExternalStorageDirectory();
-                File directory=new File(sd.getAbsolutePath()+"/MyFiles");
-
-                directory.mkdirs();
-                File file=new File(directory,note);
-                try {
-                    FileInputStream fIn = new FileInputStream(file);
-                    InputStreamReader isr=new InputStreamReader(fIn);
-
-
-
-                    if(fIn!=null){
-                        BufferedReader reader=new BufferedReader(isr);
-                        String str="";
-                        StringBuffer buf=new StringBuffer();
-
-                        while((str=reader.readLine())!=null){
-                            buf.append(str+"\n");
-                        }
-                        et.setText(buf.toString());
-
-                        isr.close();
-                        fIn.close();
-
+                else{
+                    String tag1 = (String) layout1.getTag();
+                    int id_audio1 = getResources().getIdentifier(tag1, "raw", getPackageName());
+                    try {
+                        playAudio(id_audio1);
+                        Toast.makeText(getApplicationContext(), "음악 파일 재생1", Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                }
+            }
+        });
 
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        layout2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                c2++;
+                if(c2%2==0) {
+                    killMediaPlayer();
+                    Toast.makeText(getApplicationContext(), "음악 파일 멈춤2", Toast.LENGTH_LONG).show();
                 }
 
-
+                else {
+                    String tag2 = (String) layout2.getTag();
+                    int id_audio2 = getResources().getIdentifier(tag2, "raw", getPackageName());
+                    try {
+                        playAudio(id_audio2);
+                        Toast.makeText(getApplicationContext(), "음악 파일 재생2", Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
-
-
-        b4.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                finish();
-            }
-        });
-
-
     }
 
+
+
+
+    private void playAudio(int id)throws Exception{
+        killMediaPlayer();
+        mediaPlayer=MediaPlayer.create(this,id);
+        mediaPlayer.start();
+    }
+
+    private void killMediaPlayer(){
+        if(mediaPlayer!=null){
+            try{
+                mediaPlayer.release();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 }
+
+
+
+
+
+
 
 
 
